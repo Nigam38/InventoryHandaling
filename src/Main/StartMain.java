@@ -17,6 +17,8 @@ public class StartMain extends Application {
         mainStage = primaryStage;
         mainStage.setScene(new WelcomeScene());
         mainStage.setTitle(ScreenSize.title);
+        mainStage.setResizable(false);
         mainStage.show();
+
     }
 }
