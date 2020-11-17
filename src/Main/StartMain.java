@@ -1,5 +1,6 @@
 package Main;
 
+import Database.DatabaseConnection;
 import Scene.WelcomeScene;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -19,6 +20,6 @@ public class StartMain extends Application {
         mainStage.setTitle(ScreenSize.title);
         mainStage.setResizable(false);
         mainStage.show();
-
+        DatabaseConnection db = DatabaseConnection.getInstance();
     }
 }
