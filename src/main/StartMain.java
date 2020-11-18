@@ -1,6 +1,6 @@
-package Main;
+package main;
 
-import Scene.WelcomeScene;
+import scene.WelcomeScene;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
