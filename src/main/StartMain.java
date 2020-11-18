@@ -22,5 +22,6 @@ public class StartMain extends Application {
         mainStage.setResizable(false);
         mainStage.show();
         DatabaseConnection db = DatabaseConnection.getInstance();
+        //db.addRecord();
     }
 }

@@ -1,7 +1,6 @@
 package database;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.*;
 
 public class DatabaseConnection {
     private static DatabaseConnection instance = null;
@@ -17,6 +16,11 @@ public class DatabaseConnection {
             }catch (Exception e){
                 e.printStackTrace();
             }
+            try {
+                createTable(DBTables.TABLE_CATEGORY, DBTables.CREATE_TABLE_CATEGORY, connection);
+            }catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -26,4 +30,39 @@ public class DatabaseConnection {
         }
         return instance;
     }
+
+    public void createTable(String tableName, String tableQuery, Connection connection) throws SQLException {
+        Statement createTables;
+        DatabaseMetaData metaData = connection.getMetaData();
+        ResultSet resultSet = metaData.getTables("npateldb",null, tableName,null);
+        if(resultSet.next()) {
+            System.out.println(tableName + " Table already exists!");
+        }else  {
+            createTables = connection.createStatement();
+            createTables.execute(tableQuery);
+            System.out.println("The " + tableName + " table has been created");
+
+        }
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
