@@ -1,9 +1,10 @@
 package main;
 
 import database.DatabaseConnection;
-import scene.WelcomeScene;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import scene.WelcomeScene;
+
 
 public class StartMain extends Application {
 
