@@ -1,4 +1,4 @@
-package Main;
+package main;
 
 public class ScreenSize {
     public final static int ScreenX = 1024;

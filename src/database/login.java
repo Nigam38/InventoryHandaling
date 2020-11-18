@@ -1,4 +1,4 @@
-package Database;
+package database;
 
 public class login {
     public static final String DB_NAME = "npateldb";

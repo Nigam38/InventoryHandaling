@@ -1,4 +1,4 @@
-package Pane;
+package pane;
 
 import javafx.geometry.Pos;
 import javafx.scene.layout.BorderPane;

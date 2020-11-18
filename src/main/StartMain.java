@@ -1,7 +1,7 @@
-package Main;
+package main;
 
-import Database.DatabaseConnection;
-import Scene.WelcomeScene;
+import database.DatabaseConnection;
+import scene.WelcomeScene;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
