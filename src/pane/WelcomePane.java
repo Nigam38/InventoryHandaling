@@ -1,5 +1,7 @@
 package pane;
 
+import database.DBTables;
+import database.DatabaseConnection;
 import javafx.geometry.Pos;
 import javafx.scene.layout.BorderPane;
 
@@ -15,13 +17,11 @@ import javafx.scene.text.Text;
 import main.StartMain;
 import scene.SceneCRUD;
 
+import java.sql.ResultSet;
+import java.sql.Statement;
+
 public class WelcomePane extends BorderPane {
     public WelcomePane() {
-        String user = "nigam";
-        String pw = "password";
-        final String[] checkUser = new String[1];
-        final String[] checkPw = new String[1];
-
 
         // HBox
 
@@ -90,18 +90,29 @@ public class WelcomePane extends BorderPane {
 
         //Action for btnLogin
         btnLogin.setOnMouseClicked(e -> {
-            checkUser[0] = txtUserName.getText().toString();
-            checkPw[0] = pf.getText().toString();
-            Alert alert;
-            if(checkUser[0].equals(user) && checkPw[0].equals(pw)){
-                StartMain.mainStage.setScene(new SceneCRUD());
-            }
-            else{
-                alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error");
-                alert.setHeaderText("Ooops, Error!");
-                alert.setContentText("Incorrect User or Password.");
-                alert.show();
+
+            String username = txtUserName.getText();
+            String password = pf.getText();
+            DatabaseConnection db = DatabaseConnection.getInstance();
+
+            try {
+                Statement getCategories =
+                        db.getConnection().createStatement();
+                String query = "SELECT * FROM " + DBTables.TABLE_LOGIN + " WHERE user='"+username+"' and password='"+password+"'";
+
+                ResultSet data = getCategories.executeQuery(query);
+                Alert alert;
+                if(data.next()){
+                    StartMain.mainStage.setScene(new SceneCRUD());
+                }else {
+                    alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setHeaderText("Ooops, Error!");
+                    alert.setContentText("Incorrect User or Password.");
+                    alert.show();
+                }
+            } catch (Exception exception) {
+                exception.printStackTrace();
             }
 
             txtUserName.setText("");
