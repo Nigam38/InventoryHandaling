@@ -3,17 +3,17 @@ package database;
 public class DBTables {
 
     //LOGIN TABLE
-    public static final String TABLE_LOGIN = "login_java";
+    public static final String TABLE_LOGIN = "java_login";
     public static final String LOGIN_USER = "user";
     public static final String LOGIN_PASSWORD = "password";
 
     //CATEGORY TABLE
-    public static final String TABLE_CATEGORY = "category";
+    public static final String TABLE_CATEGORY = "java_category";
     public static final String CATEGORY_ID = "id";
     public static final String CATEGORY_NAME = "name";
 
     //ITEMS TABLE
-    public static final String TABLE_ITEM = "store_items";
+    public static final String TABLE_ITEM = "java_items";
     public static final String ITEM_ID = "id";
     public static final String ITEM_CAT_ID = "cat_id";
     public static final String ITEM_NAME = "name";
