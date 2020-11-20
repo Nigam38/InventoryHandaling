@@ -3,7 +3,11 @@ package main;
 import database.DatabaseConnection;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import pojo.Category;
 import scene.WelcomeScene;
+import table.CategoryTable;
+
+import java.util.ArrayList;
 
 
 public class StartMain extends Application {
@@ -21,7 +25,8 @@ public class StartMain extends Application {
         mainStage.setTitle(ScreenSize.title);
         mainStage.setResizable(false);
         mainStage.show();
-        DatabaseConnection db = DatabaseConnection.getInstance();
+        CategoryTable table = new CategoryTable();
+        ArrayList<Category> coinsArrayList = table.getAllCategories();
         //db.addRecord();
     }
 }
