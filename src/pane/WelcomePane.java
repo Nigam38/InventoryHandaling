@@ -12,6 +12,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import main.StartMain;
+import scene.SceneCRUD;
 
 public class WelcomePane extends BorderPane {
     public WelcomePane() {
@@ -90,21 +92,18 @@ public class WelcomePane extends BorderPane {
         btnLogin.setOnMouseClicked(e -> {
             checkUser[0] = txtUserName.getText().toString();
             checkPw[0] = pf.getText().toString();
+            Alert alert;
             if(checkUser[0].equals(user) && checkPw[0].equals(pw)){
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Information");
-                alert.setHeaderText(null);
-                alert.setContentText("Login Successful.");
-                alert.show();
-
+                StartMain.mainStage.setScene(new SceneCRUD());
             }
             else{
-                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
                 alert.setHeaderText("Ooops, Error!");
                 alert.setContentText("Incorrect User or Password.");
                 alert.show();
             }
+
             txtUserName.setText("");
             pf.setText("");
         });
