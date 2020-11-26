@@ -42,8 +42,7 @@ public class DBTables {
                     ITEM_CAT_ID + " int NOT NULL, " +
                     ITEM_NAME + " VARCHAR(20) NOT NULL, " +
                     ITEM_PRICE + " decimal(4,2) NOT NULL, " +
-                    "FOREIGN KEY (" + ITEM_CAT_ID + ")" +
-                        " REFERENCES " + TABLE_CATEGORY + "(" + CATEGORY_ID + "))";
+                    "FOREIGN KEY (" + ITEM_CAT_ID + ")" + " REFERENCES " + TABLE_CATEGORY + "(" + CATEGORY_ID + "))";
 
 
 
