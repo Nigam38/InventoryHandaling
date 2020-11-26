@@ -12,10 +12,15 @@ public class DBTables {
     public static final String CATEGORY_ID = "id";
     public static final String CATEGORY_NAME = "name";
 
+    //ITEM_NAME TABLE
+    public static final String TABLE_ITEM_NAME = "java_item_name";
+    public static final String ITEM_NAME_ID = "id";
+    public static final String ITEM_NAME_NAME = "name";
+
     //ITEMS TABLE
     public static final String TABLE_ITEM = "java_items";
     public static final String ITEM_ID = "id";
-    public static final String ITEM_CAT_ID = "cat_id";
+    public static final String ITEM_CAT_NAME = "cat_name";
     public static final String ITEM_NAME = "name";
     public static final String ITEM_PRICE = "price";
 
@@ -36,16 +41,22 @@ public class DBTables {
                     "PRIMARY KEY(" + CATEGORY_ID + ")" +
                     ")";
 
+    public static final String CREATE_TABLE_ITEM_NAME =
+            "CREATE TABLE " + TABLE_ITEM_NAME + "(" +
+                    ITEM_NAME_ID + " int NOT NULL AUTO_INCREMENT, " +
+                    ITEM_NAME_NAME + " VARCHAR(25), " +
+                    "PRIMARY KEY(" + ITEM_NAME_ID + ")" +
+                    ")";
+
     public static final String CREATE_TABLE_ITEM =
             "CREATE TABLE " + TABLE_ITEM + "("+
                     ITEM_ID + " int NOT NULL AUTO_INCREMENT PRIMARY KEY, " +
-                    ITEM_CAT_ID + " int NOT NULL, " +
-                    ITEM_NAME + " VARCHAR(20) NOT NULL, " +
-                    ITEM_PRICE + " decimal(4,2) NOT NULL, " +
-                    "FOREIGN KEY (" + ITEM_CAT_ID + ")" +
-                        " REFERENCES " + TABLE_CATEGORY + "(" + CATEGORY_ID + "))";
-
-
-
+                    ITEM_CAT_NAME + " int NOT NULL, " +
+                    ITEM_NAME + " int NOT NULL, " +
+                    ITEM_PRICE + " int(2) NOT NULL, " +
+                    "FOREIGN KEY (" + ITEM_NAME + ")" +
+                    " REFERENCES " + TABLE_ITEM_NAME + "(" + ITEM_NAME_ID + "),"+
+                    "FOREIGN KEY (" + ITEM_CAT_NAME + ")" +
+                    " REFERENCES " + TABLE_CATEGORY + "(" + CATEGORY_ID + "))";
 
 }

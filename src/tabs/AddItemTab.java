@@ -9,39 +9,58 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import pojo.Category;
+import pojo.Item;
+import pojo.ItemName;
 import table.CategoryTable;
+import table.ItemNameTable;
+import table.ItemTable;
 
 public class AddItemTab extends Tab {
 
     private static AddItemTab tab;
     private AddItemTab() {
         this.setText("Add Item");
+        ItemTable itemTable = new ItemTable();
         CategoryTable categoryTable = new CategoryTable();
+        ItemNameTable itemNameTable = new ItemNameTable();
 
         GridPane root = new GridPane();
 
-        Text name = new Text("ADD");
-        root.add(name,0,0);
+        Text cat = new Text("SELECT CATEGORY : ");
+        root.add(cat,0,0);
 
         ComboBox<Category> comboBox = new ComboBox<Category>();
         comboBox.setItems(
                 FXCollections.observableArrayList(categoryTable.getAllCategories()));
-
         root.add(comboBox,1,0);
 
+        Text name = new Text("ITEM NAME: ");
+        root.add(name,0,1);
+
+        ComboBox<ItemName> comboItemName = new ComboBox<ItemName>();
+        comboItemName.setItems(
+                FXCollections.observableArrayList(itemNameTable.getAllItemName()));
+        root.add(comboItemName,1,1);
+
+        Text priceText = new Text("PRICE: ");
+        root.add(priceText,0,2);
+
         TextField price = new TextField();
-        root.add(price,1,1);
+        root.add(price,1,2);
 
-        Button submit = new Button();
+        Button submit = new Button("SUBMIT");
         submit.setOnAction(e-> {
-            Category category = new Category(comboBox.getSelectionModel().getSelectedItem().getId());
-
-            Double.parseDouble(price.getText());
+            Item item = new Item(
+                    comboBox.getSelectionModel().getSelectedItem().getId(),
+                    comboItemName.getSelectionModel().getSelectedItem().getId(),
+                    Integer.parseInt(price.getText()));
+            itemTable.createItem(item);
 
           //  categoryTable.createTable(category);
         });
 
-        root.add(submit,2,1);
+        root.add(submit,2,3);
+        this.setContent(root);
     }
 
     public static AddItemTab getInstance() {
