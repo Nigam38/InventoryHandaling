@@ -8,6 +8,7 @@ import pojo.DisplayItem;
 import pojo.Item;
 
 import java.sql.PreparedStatement;
+import pojo.Item;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -63,6 +64,7 @@ public class ItemTable implements ItemDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
 
     @Override

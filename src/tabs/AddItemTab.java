@@ -9,6 +9,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import pojo.Category;
 import pojo.DisplayItem;
+
 import pojo.Item;
 import pojo.ItemName;
 import table.CategoryTable;
@@ -25,6 +26,7 @@ public class AddItemTab extends Tab {
     ItemNameTable itemNameTable = new ItemNameTable();
 
     private AddItemTab() {
+
         this.setText("Add/Remove Item");
         BorderPane mainPane = new BorderPane();
         mainPane.setLeft(addGridPane());
@@ -32,9 +34,11 @@ public class AddItemTab extends Tab {
         this.setContent(mainPane);
     }
 
+
     public GridPane addGridPane() {
         GridPane root = new GridPane();
         root.setVgap(10);
+
         Text cat = new Text("SELECT CATEGORY : ");
         root.add(cat,0,0);
 
@@ -58,6 +62,7 @@ public class AddItemTab extends Tab {
         root.add(price,1,2);
 
         Button submit = new Button("INSERT");
+
         submit.setOnAction(e-> {
             Item item = new Item(
                     comboBox.getSelectionModel().getSelectedItem().getId(),
@@ -88,6 +93,7 @@ public class AddItemTab extends Tab {
             alert.show();
 
             refreshTable();
+
 
         });
 
