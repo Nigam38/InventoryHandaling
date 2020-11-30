@@ -60,12 +60,6 @@ public class ItemTable implements ItemDAO {
                 DBTables.ITEM_ID + " = " + id;
         try {
             db.getConnection().createStatement().execute(query);
-            Alert alert;
-            alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Confirmation Message");
-            alert.setHeaderText("");
-            alert.setContentText("Data deleted");
-            alert.show();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -82,12 +76,6 @@ public class ItemTable implements ItemDAO {
                 "')";
         try {
             db.getConnection().createStatement().execute(query);
-            Alert alert;
-            alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Confirmation Message");
-            alert.setHeaderText("");
-            alert.setContentText("Data inserted");
-            alert.show();
         } catch (SQLException e) {
             e.printStackTrace();
         }

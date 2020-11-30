@@ -25,7 +25,7 @@ public class AddItemTab extends Tab {
     ItemNameTable itemNameTable = new ItemNameTable();
 
     private AddItemTab() {
-        this.setText("Add Item");
+        this.setText("Add/Remove Item");
         BorderPane mainPane = new BorderPane();
         mainPane.setLeft(addGridPane());
         mainPane.setCenter(tablePane());
@@ -34,7 +34,7 @@ public class AddItemTab extends Tab {
 
     public GridPane addGridPane() {
         GridPane root = new GridPane();
-
+        root.setVgap(10);
         Text cat = new Text("SELECT CATEGORY : ");
         root.add(cat,0,0);
 
@@ -64,18 +64,35 @@ public class AddItemTab extends Tab {
                     comboItemName.getSelectionModel().getSelectedItem().getId(),
                     Integer.parseInt(price.getText()));
             itemTable.createItem(item);
+
+            Alert alert;
+            alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle(null);
+            alert.setHeaderText(null);
+            alert.setContentText("Data inserted");
+            alert.show();
+
+            refreshTable();
         });
 
         Button removeButton = new Button("DELETE");
         removeButton.setOnAction(e->{
             DisplayItem item = (DisplayItem) tableView.getSelectionModel().getSelectedItem();
             itemTable.deleteItem(item.getId());
+
+            Alert alert;
+            alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle(null);
+            alert.setHeaderText(null);
+            alert.setContentText("Data deleted");
+            alert.show();
+
             refreshTable();
-            //  StatsTab.getInstance().generateChart();
+
         });
 
         root.add(submit,0,3);
-        root.add(removeButton,2,3);
+        root.add(removeButton,1,3);
 
         return root;
     }
@@ -97,7 +114,7 @@ public class AddItemTab extends Tab {
         tableView.getColumns().add(column2);
 
         TableColumn<DisplayItem, String> column3 =
-                new TableColumn<>("PRICE($)");
+                new TableColumn<>("PRICE ($)");
         column3.setCellValueFactory(
                 e -> new SimpleStringProperty(
                         e.getValue().getPrice()));

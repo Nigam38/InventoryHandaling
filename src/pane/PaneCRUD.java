@@ -28,10 +28,10 @@ public class PaneCRUD extends BorderPane {
         tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
 
         AddItemTab addItemTab = AddItemTab.getInstance();
-        RemoveItemTab removeItemTab = RemoveItemTab.getInstance();
-        UpdateItemTab updateItemTab = UpdateItemTab.getInstance();
+     //   RemoveItemTab removeItemTab = RemoveItemTab.getInstance();
+      //  UpdateItemTab updateItemTab = UpdateItemTab.getInstance();
 
-        tabPane.getTabs().addAll(addItemTab, removeItemTab, updateItemTab);
+        tabPane.getTabs().addAll(addItemTab);
 
         this.setTop(menu);
         this.setCenter(tabPane);
