@@ -4,8 +4,10 @@ import daos.ItemDAO;
 import database.DBTables;
 import database.DatabaseConnection;
 import javafx.scene.control.Alert;
+import pojo.DisplayItem;
 import pojo.Item;
 
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -16,54 +18,57 @@ public class ItemTable implements ItemDAO {
         ArrayList<Item> items;
     @Override
     public ArrayList<Item> getAllItems() {
-//        String query = "SELECT * FROM " + DBTables.TABLE_ITEM;
-//        items = new ArrayList<Item>();
-//        try {
-//            Statement getItems = db.getConnection().createStatement();
-//            ResultSet data = getItems.executeQuery(query);
-//            while(data.next()) {
-//                items.add(new Item(data.getInt(DBTables.ITEM_ID),
-//                        data.getInt(DBTables.ITEM_CAT_ID),
-//                        data.getInt(DBTables.ITEM_NAME),
-//                        data.getInt(DBTables.ITEM_PRICE)));
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return items;
-        return null;
+        String query = "SELECT * FROM " + DBTables.TABLE_ITEM;
+        items = new ArrayList<Item>();
+        try {
+            Statement getItems = db.getConnection().createStatement();
+            ResultSet data = getItems.executeQuery(query);
+            while(data.next()) {
+                items.add(new Item(data.getInt(DBTables.ITEM_ID),
+                        data.getInt(DBTables.ITEM_NAME),
+                        data.getInt(DBTables.ITEM_CAT_NAME),
+                        data.getInt(DBTables.ITEM_PRICE)));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return items;
     }
 
     @Override
     public Item getItem(int itemID) {
-//        String query = "SELECT FROM " + DBTables.TABLE_ITEM + " WHERE " +
-//                DBTables.ITEM_ID + " = " + itemID;
-//        Item item = new Item();
-//        try {
-//            Statement getItem = db.getConnection().createStatement();
-//            ResultSet data = getItem.executeQuery(query);
-//            data.next();
-//            items.add(new Item(data.getInt(DBTables.ITEM_ID),
-//                    data.getInt(DBTables.ITEM_CAT_ID),
-//                    data.getInt(DBTables.ITEM_NAME),
-//                    data.getInt(DBTables.ITEM_PRICE)));
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return item;
-        return null;
+        String query = "SELECT FROM " + DBTables.TABLE_ITEM + " WHERE " +
+                DBTables.ITEM_ID + " = " + itemID;
+        Item item = new Item();
+        try {
+            Statement getItem = db.getConnection().createStatement();
+            ResultSet data = getItem.executeQuery(query);
+            data.next();
+            items.add(new Item(data.getInt(DBTables.ITEM_ID),
+                    data.getInt(DBTables.ITEM_NAME),
+                    data.getInt(DBTables.ITEM_CAT_NAME),
+                    data.getInt(DBTables.ITEM_PRICE)));
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return item;
     }
 
     @Override
     public void deleteItem(int id) {
-//        String query  = "DELETE FROM " + DBTables.TABLE_ITEM + " WHERE " +
-//                DBTables.ITEM_ID + " = " + id;
-//        try {
-//            db.getConnection().createStatement().execute(query);
-//            System.out.println("Deleted record");
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
+        String query  = "DELETE FROM " + DBTables.TABLE_ITEM + " WHERE " +
+                DBTables.ITEM_ID + " = " + id;
+        try {
+            db.getConnection().createStatement().execute(query);
+            Alert alert;
+            alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Message");
+            alert.setHeaderText("");
+            alert.setContentText("Data deleted");
+            alert.show();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -86,6 +91,47 @@ public class ItemTable implements ItemDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
 
+    public ArrayList<DisplayItem> getPrettyItems(){
+        ArrayList<DisplayItem> items = new ArrayList<DisplayItem>();
+        String query = "SELECT java_items.id, java_category.name AS item_category, " +
+                " java_item_name.name as item_name, java_items.price" +
+                " from java_items " +
+                "JOIN java_category on java_items.cat_name = java_category.id " +
+                "JOIN java_item_name on java_items.name = java_item_name.id " +
+                "ORDER BY java_items.id ASC";
+        try {
+            Statement getItems = db.getConnection().createStatement();
+            ResultSet data = getItems.executeQuery(query);
+            while(data.next()) {
+                items.add(new DisplayItem(data.getInt("id"),
+                        data.getString("item_name"),
+                        data.getString("item_category"),
+                        data.getString("price")));
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return items;
+
+    }
+
+    public int getItemCount(int coin) {
+        int count = -1;
+        try {
+            PreparedStatement getCount = db.getConnection()
+                    .prepareStatement("SELECT * FROM " + DBTables.TABLE_ITEM + " WHERE "
+                                    + DBTables.ITEM_NAME + " = '" + coin + "'", ResultSet.TYPE_SCROLL_SENSITIVE,
+                            ResultSet.CONCUR_UPDATABLE);
+            ResultSet data = getCount.executeQuery();
+            data.last();
+            count = data.getRow();
+        }
+        catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return count;
     }
 }
