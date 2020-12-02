@@ -35,12 +35,15 @@ public class WelcomePane extends BorderPane {
 
 
         // Label and TextBox
-        Label lblUserName = new Label("Username:");
-        TextField txtUserName = new TextField();
-        Label lblPassword = new Label("Password:");
-        PasswordField pf = new PasswordField();
-        Button btnLogin = new Button("Login");
-        Label lblMessage = new Label();
+/*
+        try {
+
+            Label lblUserName = new Label("Username:");
+            TextField txtUserName = new TextField();
+            Label lblPassword = new Label("Password:");
+            PasswordField pf = new PasswordField();
+            Button btnLogin = new Button("Login");
+            Label lblMessage = new Label();
 
         // Set fonts in Label and Button
         Font font = Font.font("Acme", FontWeight.EXTRA_BOLD, 25);
@@ -119,6 +122,10 @@ public class WelcomePane extends BorderPane {
             txtUserName.setText("");
             pf.setText("");
         });
+        } catch (Exception ex){
+            System.out.println(ex);
+        }
+*/
 
         //Add HBox and GridPane to BorderPane
         this.setCenter(vb);
