@@ -98,7 +98,7 @@ public class WelcomePane extends BorderPane {
             try {
                 Statement getCategories =
                         db.getConnection().createStatement();
-                String query = "SELECT * FROM " + DBTables.TABLE_LOGIN
+                String query = "SELECT * FROM " + DBTables.TABLE_LOGIN;
                 query+=" WHERE user='"+username+"' and password='"+password+"'";
 
                 ResultSet data = getCategories.executeQuery(query);
