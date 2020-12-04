@@ -17,6 +17,7 @@ import javafx.scene.text.Text;
 import main.StartMain;
 import scene.SceneCRUD;
 
+import java.io.*;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
@@ -102,8 +103,20 @@ public class WelcomePane extends BorderPane {
 
                 ResultSet data = getCategories.executeQuery(query);
                 Alert alert;
+
+                String fileName = "login.txt";
+                String filePath = "src/fileIO/" + fileName;
+
                 if(data.next()){
-                    StartMain.mainStage.setScene(new SceneCRUD());
+                    try  {
+                        BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(filePath,true));
+                        String fileContent = username + " || " + password + "\n";
+                        bufferedWriter.write(fileContent);
+                        bufferedWriter.close();
+                    } catch (IOException ioException) {
+                        ioException.printStackTrace();
+                    }
+                 StartMain.mainStage.setScene(new SceneCRUD());
                 }else {
                     alert = new Alert(Alert.AlertType.ERROR);
                     alert.setTitle("Error");
