@@ -21,8 +21,10 @@ public class DatabaseConnection {
             }
             try {
                 createTable(DBTables.TABLE_CATEGORY, DBTables.CREATE_TABLE_CATEGORY, connection);
+                createTable(DBTables.TABLE_ITEM_NAME, DBTables.CREATE_TABLE_ITEM_NAME, connection);
                 createTable(DBTables.TABLE_LOGIN, DBTables.CREATE_TABLE_LOGIN, connection);
                 createTable(DBTables.TABLE_ITEM, DBTables.CREATE_TABLE_ITEM, connection);
+
 
             }catch (Exception e) {
                 e.printStackTrace();
