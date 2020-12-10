@@ -51,6 +51,7 @@ public class DBTables {
     public static final String CREATE_TABLE_ITEM =
             "CREATE TABLE " + TABLE_ITEM + "("+
                     ITEM_ID + " int NOT NULL AUTO_INCREMENT PRIMARY KEY, " +
+<<<<<<< HEAD
                     ITEM_CAT_NAME + " int NOT NULL, " +
                     ITEM_NAME + " int NOT NULL, " +
                     ITEM_PRICE + " int(2) NOT NULL, " +
@@ -58,5 +59,14 @@ public class DBTables {
                     " REFERENCES " + TABLE_ITEM_NAME + "(" + ITEM_NAME_ID + "),"+
                     "FOREIGN KEY (" + ITEM_CAT_NAME + ")" +
                     " REFERENCES " + TABLE_CATEGORY + "(" + CATEGORY_ID + "))";
+=======
+                    ITEM_CAT_ID + " int NOT NULL, " +
+                    ITEM_NAME + " VARCHAR(20) NOT NULL, " +
+                    ITEM_PRICE + " decimal(4,2) NOT NULL, " +
+                    "FOREIGN KEY (" + ITEM_CAT_ID + ")" + " REFERENCES " + TABLE_CATEGORY + "(" + CATEGORY_ID + "))";
+
+
+
+>>>>>>> fffb1f6ab7893a2ae17c140f1a855bf61b45be3f
 
 }

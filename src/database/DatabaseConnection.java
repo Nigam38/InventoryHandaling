@@ -7,11 +7,14 @@ public class DatabaseConnection {
     private static Connection connection = null;
 
     private DatabaseConnection() {
+        final String DB_NAME = "InventoryHandaling";
+        final String DB_USER = "skaur";
+        final String DB_PASSWORD = "simmi@123";
         if (connection == null) {
             try {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                connection = DriverManager.getConnection("jdbc:mysql://localhost:3307/" + login.DB_NAME + "?serverTimezone=UTC",
-                        login.DB_USER, login.DB_PASSWORD);
+                Class.forName("com.mysql.jdbc.Driver");
+                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/" + DB_NAME,
+                        DB_USER, DB_PASSWORD);
                 System.out.println("Successfully connected.");
             }catch (Exception e){
                 e.printStackTrace();
@@ -29,6 +32,7 @@ public class DatabaseConnection {
         }
     }
 
+
     public static DatabaseConnection getInstance() {
         if(instance == null){
             instance = new DatabaseConnection();
@@ -42,11 +46,10 @@ public class DatabaseConnection {
         ResultSet resultSet = metaData.getTables("npateldb",null, tableName,null);
         if(resultSet.next()) {
             System.out.println(tableName + " Table already exists!");
-        }else  {
+        }else {
             createTables = connection.createStatement();
             createTables.execute(tableQuery);
             System.out.println("The " + tableName + " table has been created");
-
         }
     }
 
